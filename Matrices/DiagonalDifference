@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Matrices
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int dim = int.Parse(Console.ReadLine());
+            
+            int[,] matrix = new int[dim,dim];
+            int sumPrime = 0;
+            int sumSecond = 0;
+
+            for (int i = 0; i < dim; i++)
+            {
+                int[] integers = Console.ReadLine().Trim().Split().Select(int.Parse).ToArray();
+                for (int j = 0; j < dim; j++)
+                {
+                    matrix[i, j] = integers[j];
+                }
+                
+            }
+
+            for (int row = 0; row < dim; row++)
+            {
+                for (int col = 0; col < dim; col++)
+                {
+                    if (row==col)
+                    {
+                        sumPrime += matrix[row, col];
+                    }
+                }
+            }
+            for (int row = 0; row < dim; row++)
+            {
+                for (int col = 0; col < dim; col++)
+                {
+                    if (col == dim-row-1)
+                    {
+                        sumSecond += matrix[row, col];
+                    }
+                }
+            }
+
+            Console.WriteLine(Math.Abs(sumSecond-sumPrime));
+        }
+    }
+}
